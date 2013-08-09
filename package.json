@@ -1,7 +1,7 @@
 {
   "name": "roadmap",
   "description": "A roadmap generation quine powered by Github",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
