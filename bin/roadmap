@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    winston = require('winston').cli(),
+    roadmap = require('../lib/index');
+    
+var argv = require('optimist')
+  .usage('Generates a `README.md` file from all milestones and issues in a given Github repository.')
+  .options({
+    help: {
+      alias: 'h',
+      boolean: true
+    },
+    repo: {
+      alias: 'r',
+      string: true,
+      default: 'roadmap'
+    },
+    owner: {
+      alias: 'o',
+      string: true,
+      demand: true
+    },
+    username: {
+      alias: 'u',
+      string: true,
+      demand: true
+    },
+    password: {
+      alias: 'p',
+      string: true,
+      demand: true
+    },
+    dry: {
+      alias: 'd',
+      boolean: true
+    }
+  }).argv;
+
+if (argv.help) {
+  return argv.showHelp();
+} 
+
+roadmap({
+  owner: argv.owner,
+  repo: argv.repo,
+  username: argv.username,
+  password: argv.password,
+  logger: winston
+}, function (err, doc) {
+  if (err) {
+    return winston.error(err.message);
+  }
+  
+  winston.info('Done generating Roadmap from Github repo: ' + argv.repo);
+  if (argv.dry) {
+    winston.info('Dry run: dumping output');
+    return console.log(doc);
+  }
+  
+  winston.info('Saving information to README.md');
+  fs.writeFileSync('README.md', doc, 'utf8');
+});
