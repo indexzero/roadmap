@@ -1,0 +1,27 @@
+{
+  "name": "roadmap",
+  "description": "A roadmap generation quine powered by Github",
+  "version": "0.0.0",
+  "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/indexzero/roadmap.git" 
+  },
+  "keywords": ["github", "engineering", "planning"],
+  "dependencies": {
+    "async": "0.2.x",
+    "github": "0.1.10",
+    "moment": "2.1.0",
+    "optimist": "0.6.x",
+    "winston": "0.7.x"
+  },
+  "devDependencies": {
+    "vows": "0.7.x"
+  },
+  "preferGlobal": true,
+  "main": "./lib/index",
+  "bin": {
+    "roadmap": "bin/roadmap"
+  },
+  "engines": { "node": ">= 0.8.0" }
+}
